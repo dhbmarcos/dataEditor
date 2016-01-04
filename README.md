@@ -4,6 +4,19 @@ JSON data editor interface.
 
 This page parse a JSON format file and write it in more readable human format.
 
+## Installation
+
+Download the dataEditor.html and w3.css in a folder.
+
+## How to use
+
+1. Open the dataEditor.html in your web browser;
+2. Put "?" and the URL path of the JSON file format.
+
+You can use a link with complete call. For sample:
+
+    127.0.0.1/dataEditor.html?sample.json
+ 
 
     dataEditor. Show data in JSON format
     Copyright (C) 2016  D. H. B. Marcos.

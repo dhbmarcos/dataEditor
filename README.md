@@ -1,6 +1,3 @@
-# dataEditor
-JSON data editor interface.
-
 This page parse a JSON format file and write it in more readable human format.
 
 ## No Installation

@@ -24,98 +24,97 @@
 	
 	<script>
 		
-		window.onerror = function(msg, url, linenumber) {
-    		alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
+		window.onerror = function (message, url, lineNumber) {
+    		alert ('Error message: ' + message + '\nURL: ' + url + '\nLine Number: ' + lineNumber);
     		return true;
 		};
 		
-		function println(text) {
-			 document.getElementById("data").innerHTML += text + "</br>\n";
+		function println (text) {
+			 document.getElementById ("data").innerHTML += text + "</br>\n";
 		};
 		
-		function showString(str) {
-			return "\"" + str + "\"\n";
+		function showString (string) {
+			return "\"" + string + "\"\n";
 		}
 		
-		function showNumber(number) {
+		function showNumber (number) {
 			return number + "\n";
 		}
 		
-		function showArray(arr) {
+		function showArray (array) {
 			var text = "<ol>\n";
-			for(element in arr) {
-				text += ("<li>" + parseElement(arr[element]) + "</li>\n");
+			for (element in array) {
+				text += "<li>" + parseElement (array[element]) + "</li>\n";
 			};
-			return text + ("</ol>\n");
+			return text + "</ol>\n";
 		};
 		
-		function showObject(obj) {
+		function showObject (object) {
 			var text = "<ul>\n";
-			for(element in obj) {
-				text += ("<li>" + element + ": " + parseElement(obj[element]) + "</li>\n");
+			for (element in object) {
+				text += "<li>" + element + ": " + parseElement (object[element]) + "</li>\n";
 			};
-			return text + ("</ul>\n");
+			return text + "</ul>\n";
 		};
 		
-		function parseElement(element) {
+		function parseElement (element) {
 			
-			if(typeof(element) == "object") {
-				if(Array.isArray(element)) {
-					return showArray(element);
+			if (typeof (element) == "object") {
+				if (Array.isArray (element)) {
+					return showArray (element);
 				} else {
-					return showObject(element);
+					return showObject (element);
 				};
 			};
 			
-			if(typeof(element) == "string") {
-				return showString(element);
+			if (typeof (element) == "string") {
+				return showString (element);
 			};
 			
-			if(typeof(element) == "number") {
-				return showNumber(element);
+			if (typeof (element) == "number") {
+				return showNumbe r(element);
 			};
 		};
 
-		function loadJSON(file, callback) {   
-			var xobj = new XMLHttpRequest();
-			xobj.overrideMimeType("application/json");
-			xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
-			xobj.onreadystatechange = function () {
-				if (xobj.readyState == 4 && xobj.status == "200") {
-            		// Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-					callback(xobj.responseText);
+		function loadJSON (file, callback) {   
+			var resource = new XMLHttpRequest ();
+			resource.overrideMimeType ("application/json");
+			resource.open ('GET', file, true); // Replace 'my_data' with the path to your file
+			resource.onreadystatechange = function () {
+				if (resource.readyState == 4 && resource.status == "200") {
+					callback (resource.responseText);
 				}
 			};
-			xobj.send(null);  
+			resource.send (null);  
 		};
  
-		function loadData(file) {
+		function loadData (file) {
 			loadJSON (
-				file, function(response) {
-					var actual_JSON = JSON.parse(response);
-			
-					println(parseElement(actual_JSON));
+				file,
+				function (response) {
+					var actual_JSON = JSON.parse (response);
+					println (parseElement (actual_JSON));
 				}
 			);
     	};
     
-    	function load() {
+    	function load () {
 			var fileName = document.location.search;
 			if (fileName == "") {
-				document.getElementById("title").innerHTML = "dataEditor";
-				document.getElementById("data").innerHTML = "<p>Put a \"?\" character in the end of this URL and add the location of JSON format file.</p>";
-				document.getElementById("data").innerHTML += "<p>For sample:</p>";
-				document.getElementById("data").innerHTML += "<div class=\"w3-blockquote\"><p>http://172.0.0.1/dataEditor.html<b>?sample.json</b></p></div>";
-				document.getElementById("data").innerHTML += "<p>Clone this in <a href=\"http://dhbmarcos.github.io/dataEditor\">dhbmarcos.github.io/dataEditor.</a>.</p>";
+				document.getElementById ("title").innerHTML = "dataEditor";
+				document.getElementById ("data").innerHTML = "<p>Put a \"?\" character in the end of this URL and add the location of JSON format file.</p>";
+				document.getElementById ("data").innerHTML += "<p>For sample:</p>";
+				document.getElementById ("data").innerHTML += "<div class=\"w3-blockquote\"><p>http://172.0.0.1/dataEditor.html<b>?sample.json</b></p></div>";
+				document.getElementById ("data").innerHTML += "<p>Clone this in <a href=\"http://dhbmarcos.github.io/dataEditor\">dhbmarcos.github.io/dataEditor.</a>.</p>";
 			} else {
-				fileName = fileName.substr(1);
-				document.getElementById("title").innerHTML = fileName.slice(0, -5);
-				loadData(fileName);
+				fileName = fileName.substr (1);
+				document.getElementById ("title").innerHTML = fileName.slice (0, -5);
+				loadData (fileName);
 			};
 		};
 	</script>
 	</head>
-    <body onload="load()">
+    <body onload="load ()">
     	<header class="w3-container w3-blue">
 			<h1><div id="title"/></h1>
 		</header>

@@ -25,7 +25,8 @@
 	
 	<script>
 		
-		visualConfig = [];
+		visualConfig = {};
+		visualConfig.inputData = [];
 		
 		window.onerror = function (message, url, lineNumber) {
     		alert ('Error message: ' + message + '\nURL: ' + url + '\nLine Number: ' + lineNumber);
@@ -62,7 +63,7 @@
 					return parseObject (element, id);
 				};
 			} else {
-				visualConfig.push("/" + id + "/");
+				visualConfig.inputData.push("/" + id + "/");
 				return element + "\n";
 			};
 		};

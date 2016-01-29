@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 
     dataEditor. Show data in JSON format
     Copyright (C) 2016  D. H. B. Marcos.
@@ -19,10 +19,13 @@
 --!>
 <HTML>
 	<head>
+		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="w3.css">
 	
 	<script>
+		
+		visualConfig = [];
 		
 		window.onerror = function (message, url, lineNumber) {
     		alert ('Error message: ' + message + '\nURL: ' + url + '\nLine Number: ' + lineNumber);
@@ -33,46 +36,34 @@
 			 document.getElementById ("data").innerHTML += text + "</br>\n";
 		};
 		
-		function showString (string) {
-			return "\"" + string + "\"\n";
-		}
-		
-		function showNumber (number) {
-			return number + "\n";
-		}
-		
-		function showArray (array) {
+
+		function parseArray (array, id) {
 			var text = "<ol>\n";
-			for (element in array) {
-				text += "<li>" + parseElement (array[element]) + "</li>\n";
+			for (position in array) {
+				text += "<li>" + parseElement (array[position], id + "/" + position) + "</li>\n";
 			};
 			return text + "</ol>\n";
 		};
 		
-		function showObject (object) {
+		function parseObject (object, id) {
 			var text = "<ul>\n";
-			for (element in object) {
-				text += "<li>" + element + ": " + parseElement (object[element]) + "</li>\n";
+			for (property in object) {
+				text += "<li>" + property + ": " + parseElement (object[property], id + "/" + property) + "</li>\n";
 			};
 			return text + "</ul>\n";
 		};
 		
-		function parseElement (element) {
+		function parseElement (element, id) {
 			
 			if (typeof (element) == "object") {
 				if (Array.isArray (element)) {
-					return showArray (element);
+					return parseArray (element, id);
 				} else {
-					return showObject (element);
+					return parseObject (element, id);
 				};
-			};
-			
-			if (typeof (element) == "string") {
-				return showString (element);
-			};
-			
-			if (typeof (element) == "number") {
-				return showNumbe r(element);
+			} else {
+				visualConfig.push("/" + id + "/");
+				return element + "\n";
 			};
 		};
 
@@ -93,7 +84,7 @@
 				file,
 				function (response) {
 					var actual_JSON = JSON.parse (response);
-					println (parseElement (actual_JSON));
+					println (parseElement (actual_JSON, "input"));
 				}
 			);
     	};

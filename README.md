@@ -12,7 +12,7 @@ Only download all files in your folder.
 
 ## How to use
 
-1. Open the dataEditor.html in your web browser;
+1. Open the `dataEditor.html` in your web browser;
 1. Put `?` and the URL path of the JSON file format.
 
 You can use a link with complete call. For sample:

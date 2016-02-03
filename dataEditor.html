@@ -22,6 +22,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="w3.css">
+		<link id="theme" rel="stylesheet" href="w3-theme-blue.css">
 	
 	<script>
 		
@@ -71,7 +72,7 @@
 		function loadJSON (file, callback) {   
 			var resource = new XMLHttpRequest ();
 			resource.overrideMimeType ("application/json");
-			resource.open ('GET', file, true); // Replace 'my_data' with the path to your file
+			resource.open ('GET', file, true);
 			resource.onreadystatechange = function () {
 				if (resource.readyState == 4 && resource.status == "200") {
 					callback (resource.responseText);
@@ -85,12 +86,20 @@
 				file,
 				function (response) {
 					var actual_JSON = JSON.parse (response);
-					println (parseElement (actual_JSON, "input"));
+					parseConfig(actual_JSON)
+					println (parseElement (actual_JSON.data, "input"));
 				}
 			);
     	};
+		
+		function parseConfig(json) {
+			//Configure theme.
+			document.getElementById("theme").href = "themes/w3-theme-" + json.configuratons.theme + ".css";
+		}
+		
     
     	function load () {
+		
 			var fileName = document.location.search;
 			if (fileName == "") {
 				document.getElementById ("title").innerHTML = "dataEditor";
@@ -107,13 +116,13 @@
 	</script>
 	</head>
     <body onload="load ()">
-    	<header class="w3-container w3-blue">
+    	<header class="w3-container w3-theme">
 			<h1><div id="title"/></h1>
 		</header>
 		<article class="w3-container"> 
 			<p><div id="data"/></p>
 		</article>
-		<footer class="w3-container w3-grey w3-tiny">
+		<footer class="w3-container w3-theme w3-tiny">
 			<h5>dataEditor</h5>
 			<p><i>dataEditor  Copyright (C) 2016  D. H. B. Marcos</br>
 			   This program comes with ABSOLUTELY NO WARRANTY;

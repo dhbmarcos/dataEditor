@@ -1,1 +1,14 @@
-[{"blue" : "is ok", "red" : "is my fave color"}, {"green" : "is ok", "yellow" : "is ok"}]
+{
+	"configuratons": {
+		"theme": "blue"
+	},
+	"data": [
+		{
+			"blue" : "is ok",
+			"red" : "is my fave color"
+		}, {
+			"blue" : "is ok",
+			"red" : "is my fave color"
+		}
+	]
+}

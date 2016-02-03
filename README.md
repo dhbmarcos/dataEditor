@@ -1,14 +1,17 @@
 This minimalist software parse a JSON format file and write it in more readable human format.
 
 #### Input
-    [{"blue" : "is ok", "red" : "is my fave color"}]
+    {
+	"configuratons": {"theme": "blue"},
+	"data": [{"blue" : "is ok", "red" : "is my fave color"}]
+    }
 
 #### Output
 ![](https://raw.githubusercontent.com/dhbmarcos/dataEditor/gh-pages/sample1.png)
 
 ## No Installation
 
-Only download the `dataEditor.html` and the `w3.css` files in your folder.
+Only download all files in your folder.
 
 ## How to use
 

@@ -1,4 +1,4 @@
-This minimalist software parse a JSON format file and write it in more readable human format using Google Material Design abased theme (w3).
+This minimalist software parse a JSON format file and write it in more readable human format using Google Material Design based theme (W3).
 
 #### Input
     [{"blue" : "is ok", "red" : "is my fave color"}]

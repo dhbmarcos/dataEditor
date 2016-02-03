@@ -21,6 +21,11 @@ Only download all files in your folder.
 You can use a link with complete call. For sample:
 
     127.0.0.1/dataEditor.html?sample.json
+
+## More Informations
+
+https://github.com/dhbmarcos/dataEditor/wiki/
+
  
 ## License
 

@@ -1,6 +1,12 @@
 {
-	"configuratons": {
-		"theme": "blue"
+	"visualConfiguratons": {
+		"all" : {
+			"theme": "green",
+			"noOrderedListNumbers" : true,
+			"noUnorderedListSimbols" : false,
+			"orderedListStyles" : "w3-border",
+			"unorderedListStyles" : "w3-card-2  w3-tiny"
+		}
 	},
 	"data": [
 		{

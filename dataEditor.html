@@ -22,12 +22,11 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="w3.css">
-		<link id="theme" rel="stylesheet" href="w3-theme-blue.css">
+		<link id="theme" rel="stylesheet">
 	
 	<script>
 		
-		visualConfig = {};
-		visualConfig.inputData = [];
+		visualConfiguratons = {};
 		
 		window.onerror = function (message, url, lineNumber) {
     		alert ('Error message: ' + message + '\nURL: ' + url + '\nLine Number: ' + lineNumber);
@@ -37,21 +36,42 @@
 		function println (text) {
 			 document.getElementById ("data").innerHTML += text + "</br>\n";
 		};
-		
 
 		function parseArray (array, id) {
-			var text = "<ol>\n";
+			var text = "";
+
+			if (visualConfiguratons.all.noOrderedListNumbers == true) {
+				text += "<ul class='w3-ul " + visualConfiguratons.all.orderedListStyles + "'>";
+			} else {
+				text += "<ol start='1' class='" + visualConfiguratons.all.orderedListStyles + "'>";
+			};
+			
 			for (position in array) {
 				text += "<li>" + parseElement (array[position], id + "/" + position) + "</li>\n";
 			};
-			return text + "</ol>\n";
+			
+			if (visualConfiguratons.all.noOrderedListNumbers == true) {
+				text += "</ul>"
+			} else {
+				text += "</ol>"
+			};
+	
+			return text + "\n";
 		};
 		
 		function parseObject (object, id) {
-			var text = "<ul>\n";
+			var text = "";
+
+			if (visualConfiguratons.all.noUnorderedListSimbols == true) {
+				text += "<ul class='w3-ul " + visualConfiguratons.all.unorderedListStyles + "'>";
+			} else {
+				text += "<ul class='" + visualConfiguratons.all.unorderedListStyles + "'>";
+			};
+
 			for (property in object) {
 				text += "<li>" + property + ": " + parseElement (object[property], id + "/" + property) + "</li>\n";
 			};
+
 			return text + "</ul>\n";
 		};
 		
@@ -64,7 +84,7 @@
 					return parseObject (element, id);
 				};
 			} else {
-				visualConfig.inputData.push("/" + id + "/");
+				visualConfiguratons.elements.push("/" + id + "/");
 				return element + "\n";
 			};
 		};
@@ -86,16 +106,38 @@
 				file,
 				function (response) {
 					var actual_JSON = JSON.parse (response);
-					parseConfig(actual_JSON)
-					println (parseElement (actual_JSON.data, "input"));
+
+					if (parseConfig (actual_JSON)) { 					
+						println (parseElement (actual_JSON.data, "input"));
+					} else {
+						println (parseElement (actual_JSON, "input"));
+					}
 				}
 			);
     	};
 		
 		function parseConfig(json) {
-			//Configure theme.
-			document.getElementById("theme").href = "themes/w3-theme-" + json.configuratons.theme + ".css";
-		}
+		
+			visualConfiguratons.all = {};
+			visualConfiguratons.elements = [];
+		
+			if (json.visualConfiguratons === undefined)
+				return false;
+			if (json.visualConfiguratons.all === undefined)
+				return false;
+
+			visualConfiguratons = json.visualConfiguratons;
+
+			if (json.visualConfiguratons.all === undefined)				
+				visualConfiguratons.all = {};
+			if (json.visualConfiguratons.elements === undefined)
+				visualConfiguratons.elements = [];
+
+			// visualConfiguratons/all/theme
+			document.getElementById("theme").href = "themes/w3-theme-" + json.visualConfiguratons.all.theme + ".css";
+			
+			return true;
+		};
 		
     
     	function load () {
@@ -120,7 +162,7 @@
 			<h1><div id="title"/></h1>
 		</header>
 		<article class="w3-container"> 
-			<p><div id="data"/></p>
+			<p><div id="data"></p>
 		</article>
 		<footer class="w3-container w3-theme w3-tiny">
 			<h5>dataEditor</h5>

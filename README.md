@@ -1,29 +1,41 @@
-This minimalist software parse a JSON format file and write it in more readable human format using Google Material Design based theme (W3).
+This minimalist software parse a JSON format file and write it in more readable human format using Google Material Design based theme.
 
-#### Input
+# Sample
+
+## Input
     [{"blue" : "is ok", "red" : "is my fave color"}]
     
-#### Output
+## Output
 ![](https://raw.githubusercontent.com/dhbmarcos/dataEditor/gh-pages/sample1.png)
 
-## No Installation
+# Main Features
+
+* HTML5 and Material Design (1).
+* Compatible with all devices (2).
+* General theme personalization.
+* Input data by JSON file specified in URL.
+* Independent HTML5 class for each element of input data.
+
+# No Installation
 
 Only download all files in your folder.
 
-## How to use
+# How to use
 
 1. Open the `dataEditor.html` in your web browser;
-1. Put `?` and the URL path of the JSON file format.
+2. Put `?` and the URL path of the JSON file format.
 
 You can use a link with complete call. For sample:
 
     127.0.0.1/dataEditor.html?sample.json
 
-## More Informations
+# More Informations
 
-https://github.com/dhbmarcos/dataEditor/wiki/
+Documentation: https://github.com/dhbmarcos/dataEditor/wiki/
 
- 
+1. *The Material Design is implemented by W3*.
+2. *The device shall be compatible with HTML5*.
+
 ## License
 
 Copyright (C) 2016  D. H. B. Marcos.

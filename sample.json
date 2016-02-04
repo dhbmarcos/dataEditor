@@ -1,11 +1,15 @@
 {
 	"visualConfiguratons": {
-		"all" : {
-			"theme": "green",
-			"noOrderedListNumbers" : true,
-			"noUnorderedListSimbols" : false,
-			"orderedListStyles" : "w3-border",
-			"unorderedListStyles" : "w3-card-2  w3-tiny"
+		"all": {
+			"theme": "blue",
+			"ol2ul": true,
+			"orderedListStyles": "",
+			"unorderedListStyles": "nolistsymbol"
+		},
+		"elements": {
+			"input/1/blue": {
+				"class": "w3-card-2"
+			}
 		}
 	},
 	"data": [

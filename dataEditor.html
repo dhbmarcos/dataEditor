@@ -23,139 +23,150 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="w3.css">
 		<link id="theme" rel="stylesheet">
-	
-	<script>
-		
-		visualConfiguratons = {};
-		
-		window.onerror = function (message, url, lineNumber) {
-    		alert ('Error message: ' + message + '\nURL: ' + url + '\nLine Number: ' + lineNumber);
-    		return true;
-		};
-		
-		function println (text) {
-			 document.getElementById ("data").innerHTML += text + "</br>\n";
-		};
 
-		function parseArray (array, id) {
-			var text = "";
-
-			if (visualConfiguratons.all.noOrderedListNumbers == true) {
-				text += "<ul class='w3-ul " + visualConfiguratons.all.orderedListStyles + "'>";
-			} else {
-				text += "<ol start='1' class='" + visualConfiguratons.all.orderedListStyles + "'>";
+		<style>
+			.nolistsymbol {
+				list-style-type: none
+			}
+			
+		</style>
+		
+		<script>
+			
+			visualConfiguratons = {};
+			
+			window.onerror = function (message, url, lineNumber) {
+				alert ('Error message: ' + message + '\nURL: ' + url + '\nLine Number: ' + lineNumber);
+				return true;
 			};
 			
-			for (position in array) {
-				text += "<li>" + parseElement (array[position], id + "/" + position) + "</li>\n";
-			};
-			
-			if (visualConfiguratons.all.noOrderedListNumbers == true) {
-				text += "</ul>"
-			} else {
-				text += "</ol>"
-			};
-	
-			return text + "\n";
-		};
-		
-		function parseObject (object, id) {
-			var text = "";
-
-			if (visualConfiguratons.all.noUnorderedListSimbols == true) {
-				text += "<ul class='w3-ul " + visualConfiguratons.all.unorderedListStyles + "'>";
-			} else {
-				text += "<ul class='" + visualConfiguratons.all.unorderedListStyles + "'>";
+			function println (text) {
+				 document.getElementById ("data").innerHTML += text + "</br>\n";
 			};
 
-			for (property in object) {
-				text += "<li>" + property + ": " + parseElement (object[property], id + "/" + property) + "</li>\n";
-			};
-
-			return text + "</ul>\n";
-		};
-		
-		function parseElement (element, id) {
-			
-			if (typeof (element) == "object") {
-				if (Array.isArray (element)) {
-					return parseArray (element, id);
+			function parseArray (array, id) {
+				if (visualConfiguratons.all.ol2ul == true) {
+					text = "<ul class='" + visualConfiguratons.all.unorderedListStyles + "'>";
 				} else {
-					return parseObject (element, id);
+					text = "<ol start='1' class='" + visualConfiguratons.all.orderedListStyles + "'>";
 				};
-			} else {
-				visualConfiguratons.elements.push("/" + id + "/");
-				return element + "\n";
+				
+				for (position in array) {
+					text += "<li id='" + id + "/" + position + "'>" + parseElement (array[position], id + "/" + position) + "</li>\n";
+				};
+				
+				if (visualConfiguratons.all.ol2ul == true) {
+					text += "</ul>"
+				} else {
+					text += "</ol>"
+				};
+		
+				return text + "\n";
 			};
-		};
-
-		function loadJSON (file, callback) {   
-			var resource = new XMLHttpRequest ();
-			resource.overrideMimeType ("application/json");
-			resource.open ('GET', file, true);
-			resource.onreadystatechange = function () {
-				if (resource.readyState == 4 && resource.status == "200") {
-					callback (resource.responseText);
-				}
-			};
-			resource.send (null);  
-		};
- 
-		function loadData (file) {
-			loadJSON (
-				file,
-				function (response) {
-					var actual_JSON = JSON.parse (response);
-
-					if (parseConfig (actual_JSON)) { 					
-						println (parseElement (actual_JSON.data, "input"));
-					} else {
-						println (parseElement (actual_JSON, "input"));
-					}
-				}
-			);
-    	};
-		
-		function parseConfig(json) {
-		
-			visualConfiguratons.all = {};
-			visualConfiguratons.elements = [];
-		
-			if (json.visualConfiguratons === undefined)
-				return false;
-			if (json.visualConfiguratons.all === undefined)
-				return false;
-
-			visualConfiguratons = json.visualConfiguratons;
-
-			if (json.visualConfiguratons.all === undefined)				
-				visualConfiguratons.all = {};
-			if (json.visualConfiguratons.elements === undefined)
-				visualConfiguratons.elements = [];
-
-			// visualConfiguratons/all/theme
-			document.getElementById("theme").href = "themes/w3-theme-" + json.visualConfiguratons.all.theme + ".css";
 			
-			return true;
-		};
-		
-    
-    	function load () {
-		
-			var fileName = document.location.search;
-			if (fileName == "") {
-				document.getElementById ("title").innerHTML = "dataEditor";
-				document.getElementById ("data").innerHTML = "<p>Put a \"?\" character in the end of this URL and add the location of JSON format file.</p>";
-				document.getElementById ("data").innerHTML += "<p>For sample:</p>";
-				document.getElementById ("data").innerHTML += "<div class=\"w3-blockquote\"><p>http://172.0.0.1/dataEditor.html<b>?sample.json</b></p></div>";
-				document.getElementById ("data").innerHTML += "<p>Clone this in <a href=\"http://dhbmarcos.github.io/dataEditor\">dhbmarcos.github.io/dataEditor.</a>.</p>";
-			} else {
-				fileName = fileName.substr (1);
-				document.getElementById ("title").innerHTML = fileName.slice (0, -5);
-				loadData (fileName);
+			function parseObject (object, id) {
+				text = "<ul class='" + visualConfiguratons.all.unorderedListStyles + "'>";
+
+				for (property in object) {
+					text += "<li id='" + id + "/" + property + "'>" + property + ": " + parseElement (object[property], id + "/" + property) + "</li>\n";
+				};
+
+				return text + "</ul>\n";
 			};
-		};
-	</script>
+			
+			function parseElement (element, id) {
+				
+				if (typeof (element) == "object") {
+					if (Array.isArray (element)) {
+						return parseArray (element, id);
+					} else {
+						return parseObject (element, id);
+					};
+				} else {
+					visualConfiguratons.elements["/" + id + "/"] = {};
+					return element + " (" + id + ")\n";
+				};
+			};
+
+			function loadJSON (file, callback) {   
+				var resource = new XMLHttpRequest ();
+				resource.overrideMimeType ("application/json");
+				resource.open ('GET', file, true);
+				resource.onreadystatechange = function () {
+					if (resource.readyState == 4 && resource.status == "200") {
+						callback (resource.responseText);
+					}
+				};
+				resource.send (null);  
+			};
+	 
+			function loadData (file) {
+				loadJSON (
+					file,
+					function (response) {
+						var actual_JSON = JSON.parse (response);
+
+						if (parseVisualConfiguratonsAll (actual_JSON)) { 					
+							println (parseElement (actual_JSON.data, "input"));
+						} else {
+							println (parseElement (actual_JSON, "input"));
+						}
+						
+						parseVisualConfiguratonselements (actual_JSON);
+					}
+				);
+			};
+			
+			function parseVisualConfiguratonselements (json) {
+				visualConfiguratons.elements = json.visualConfiguratons.elements;
+
+				for (id in visualConfiguratons.elements) {
+					// Change class of each element.
+					tagclass = visualConfiguratons.elements[id].class;
+					document.getElementById(id).className = tagclass;
+				}
+			};
+			
+			function parseVisualConfiguratonsAll(json) {
+			
+				visualConfiguratons.all = {};
+				visualConfiguratons.elements = {};
+			
+				if (json.visualConfiguratons === undefined)
+					return false;
+				if (json.visualConfiguratons.all === undefined)
+					return false;
+
+				visualConfiguratons.all = json.visualConfiguratons.all;
+
+				if (json.visualConfiguratons.all === undefined)				
+					visualConfiguratons.all = {};
+				if (json.visualConfiguratons.elements === undefined)
+					visualConfiguratons.elements = {};
+
+				// visualConfiguratons/all/theme
+				document.getElementById("theme").href = "themes/w3-theme-" + json.visualConfiguratons.all.theme + ".css";
+				
+				return true;
+			};
+			
+		
+			function load () {
+			
+				var fileName = document.location.search;
+				if (fileName == "") {
+					document.getElementById ("title").innerHTML = "dataEditor";
+					document.getElementById ("data").innerHTML = "<p>Put a \"?\" character in the end of this URL and add the location of JSON format file.</p>";
+					document.getElementById ("data").innerHTML += "<p>For sample:</p>";
+					document.getElementById ("data").innerHTML += "<div class=\"w3-blockquote\"><p>http://172.0.0.1/dataEditor.html<b>?sample.json</b></p></div>";
+					document.getElementById ("data").innerHTML += "<p>Clone this in <a href=\"http://dhbmarcos.github.io/dataEditor\">dhbmarcos.github.io/dataEditor.</a>.</p>";
+				} else {
+					fileName = fileName.substr (1);
+					document.getElementById ("title").innerHTML = fileName.slice (0, -5);
+					loadData (fileName);
+				};
+			};
+		</script>
 	</head>
     <body onload="load ()">
     	<header class="w3-container w3-theme">

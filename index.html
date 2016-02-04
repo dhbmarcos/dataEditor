@@ -1,44 +1,67 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
-    <meta charset="UTF-8">
-    <title>dataEditor by dhbmarcos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>dataEditor by dhbmarcos</title>
   </head>
+
   <body>
-    <section class="page-header">
-      <h1 class="project-name">dataEditor</h1>
-      <h2 class="project-tagline">JSON data editor interface</h2>
-      <a href="https://github.com/dhbmarcos/dataEditor" class="btn">View on GitHub</a>
-      <a href="https://github.com/dhbmarcos/dataEditor/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/dhbmarcos/dataEditor/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+    <header>
+      <div class="inner">
+        <h1>dataEditor</h1>
+        <h2>JSON data editor interface</h2>
+        <a href="https://github.com/dhbmarcos/dataEditor" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
 
-    <section class="main-content">
-      <p>This minimalist software parse a JSON format file and write it in more readable human format using Google Material Design based theme (W3).</p>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <p>This minimalist software parse a JSON format file and write it in more readable human format using Google Material Design based theme.</p>
 
-<h4>
-<a id="input" class="anchor" href="#input" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Input</h4>
+<h1>
+<a id="sample" class="anchor" href="#sample" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sample</h1>
+
+<h2>
+<a id="input" class="anchor" href="#input" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Input</h2>
 
 <pre><code>[{"blue" : "is ok", "red" : "is my fave color"}]
 </code></pre>
 
-<h4>
-<a id="output" class="anchor" href="#output" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Output</h4>
+<h2>
+<a id="output" class="anchor" href="#output" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Output</h2>
 
 <p><img src="https://raw.githubusercontent.com/dhbmarcos/dataEditor/gh-pages/sample1.png" alt=""></p>
 
-<h2>
-<a id="no-installation" class="anchor" href="#no-installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>No Installation</h2>
+<h1>
+<a id="main-features" class="anchor" href="#main-features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Main Features</h1>
+
+<ul>
+<li>HTML5 and Material Design (1).</li>
+<li>Compatible with all devices (2).</li>
+<li>General theme personalization.</li>
+<li>Input data by JSON file specified in URL.</li>
+<li>Independent HTML5 class for each element of input data.</li>
+</ul>
+
+<h1>
+<a id="no-installation" class="anchor" href="#no-installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>No Installation</h1>
 
 <p>Only download all files in your folder.</p>
 
-<h2>
-<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use</h2>
+<h1>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use</h1>
 
 <ol>
 <li>Open the <code>dataEditor.html</code> in your web browser;</li>
@@ -50,10 +73,17 @@
 <pre><code>127.0.0.1/dataEditor.html?sample.json
 </code></pre>
 
-<h2>
-<a id="more-informations" class="anchor" href="#more-informations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>More Informations</h2>
+<h1>
+<a id="more-informations" class="anchor" href="#more-informations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>More Informations</h1>
 
-<p><a href="https://github.com/dhbmarcos/dataEditor/wiki/">https://github.com/dhbmarcos/dataEditor/wiki/</a></p>
+<p>Documentation: <a href="https://github.com/dhbmarcos/dataEditor/wiki/">https://github.com/dhbmarcos/dataEditor/wiki/</a></p>
+
+<ol>
+<li>
+<em>The Material Design is implemented by W3</em>.</li>
+<li>
+<em>The device shall be compatible with HTML5</em>.</li>
+</ol>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
@@ -72,14 +102,24 @@
 
 <p><em>You should have received a copy of the GNU General Public License</em>
 <em>along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</em></p>
+        </section>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/dhbmarcos/dataEditor">dataEditor</a> is maintained by <a href="https://github.com/dhbmarcos">dhbmarcos</a>.</span>
+        <aside id="sidebar">
+          <a href="https://github.com/dhbmarcos/dataEditor/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/dhbmarcos/dataEditor/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
+          <p class="repo-owner"><a href="https://github.com/dhbmarcos/dataEditor"></a> is maintained by <a href="https://github.com/dhbmarcos">dhbmarcos</a>.</p>
 
-    </section>
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
 
   
   </body>

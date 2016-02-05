@@ -35,7 +35,7 @@ You can use a link with complete call. For sample:
 Documentation: https://github.com/dhbmarcos/dataEditor/wiki/
 
 1. *The Material Design is implemented by W3*.
-2. *For localhost, use Firefox*
+2. *For localhost, use Firefox*.
 3. *The device shall be compatible with HTML5*.
 
 ## License

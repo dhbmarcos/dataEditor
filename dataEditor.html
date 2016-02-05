@@ -52,7 +52,7 @@
 				};
 				
 				for (position in array) {
-					text += "<li id='" + id + "/" + position + "'>" + parseElement (array[position], id + "/" + position) + "</li>\n";
+					text += "<li id='" + id + "/" + position + "'>" + parseElement (array [position], id + "/" + position) + "</li>\n";
 				};
 				
 				if (visualConfiguratons.all.ol2ul == true) {
@@ -68,7 +68,7 @@
 				text = "<ul class='" + visualConfiguratons.all.unorderedListStyles + "'>";
 
 				for (property in object) {
-					text += "<li id='" + id + "/" + property + "'>" + property + ": " + parseElement (object[property], id + "/" + property) + "</li>\n";
+					text += "<li id='" + id + "/" + property + "'>" + property + ": " + parseElement (object [property], id + "/" + property) + "</li>\n";
 				};
 
 				return text + "</ul>\n";
@@ -83,7 +83,7 @@
 						return parseObject (element, id);
 					};
 				} else {
-					visualConfiguratons.elements["/" + id + "/"] = {};
+					visualConfiguratons.elements ["/" + id + "/"] = {};
 					return element + " (" + id + ")\n";
 				};
 			};
@@ -122,12 +122,46 @@
 
 				for (id in visualConfiguratons.elements) {
 					// Change class of each element.
-					tagclass = visualConfiguratons.elements[id].class;
-					document.getElementById(id).className = tagclass;
+					tagclass = visualConfiguratons.elements [id].class;
+					document.getElementById (id).className = tagclass;
+					
+					text = document.getElementById (id).innerHTML;
+
+					// Change bold for each element.
+					if (visualConfiguratons.elements [id].bold == true)
+						document.getElementById (id).innerHTML = "<b>" + text + "</b>";
+
+					// Change italic for each element.
+					if (visualConfiguratons.elements [id].italic == true)
+						document.getElementById (id).innerHTML = "<i>" + text + "</i>";
+
+					// Change small for each element.
+					if (visualConfiguratons.elements [id].small == true)
+						document.getElementById (id).innerHTML = "<small>" + text + "</small>";
+
+					// Change mark for each element.
+					if (visualConfiguratons.elements [id].mark == true)
+						document.getElementById (id).innerHTML = "<mark>" + text + "</mark>";
+
+					// Change deleted for each element.
+					if (visualConfiguratons.elements [id].deleted == true)
+						document.getElementById (id).innerHTML = "<del>" + text + "</del>";
+
+					// Change inserted  for each element.
+					if (visualConfiguratons.elements [id].inserted  == true)
+						document.getElementById (id).innerHTML = "<ins>" + text + "</ins>";
+
+					// Change subscripted   for each element.
+					if (visualConfiguratons.elements [id].subscripted   == true)
+						document.getElementById (id).innerHTML = "<sub>" + text + "</sub>";
+
+					// Change superscripted  for each element.
+					if (visualConfiguratons.elements [id].superscripted  == true)
+						document.getElementById (id).innerHTML = "<sup>" + text + "</sup>";
 				}
 			};
 			
-			function parseVisualConfiguratonsAll(json) {
+			function parseVisualConfiguratonsAll (json) {
 			
 				visualConfiguratons.all = {};
 				visualConfiguratons.elements = {};
@@ -145,7 +179,7 @@
 					visualConfiguratons.elements = {};
 
 				// visualConfiguratons/all/theme
-				document.getElementById("theme").href = "themes/w3-theme-" + json.visualConfiguratons.all.theme + ".css";
+				document.getElementById ("theme").href = "themes/w3-theme-" + json.visualConfiguratons.all.theme + ".css";
 				
 				return true;
 			};

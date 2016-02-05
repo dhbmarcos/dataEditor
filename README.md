@@ -11,7 +11,8 @@ This minimalist software parse a JSON format file and write it in more readable 
 # Main Features
 
 * HTML5 and Material Design (1).
-* Compatible with all devices (2).
+* Portable (2).
+* Compatible with all devices (3).
 * General theme personalization.
 * Input data by JSON file specified in URL.
 * Independent HTML5 class for each element of input data.
@@ -34,7 +35,8 @@ You can use a link with complete call. For sample:
 Documentation: https://github.com/dhbmarcos/dataEditor/wiki/
 
 1. *The Material Design is implemented by W3*.
-2. *The device shall be compatible with HTML5*.
+2. *For localhost, use Firefox*
+3. *The device shall be compatible with HTML5*.
 
 ## License
 

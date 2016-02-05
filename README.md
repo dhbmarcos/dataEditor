@@ -40,7 +40,7 @@ Documentation: https://github.com/dhbmarcos/dataEditor/wiki/
 
 ## License
 
-Copyright (C) 2016  D. H. B. Marcos.
+Copyright (C) 2016  D. H. B. Marcos. _Deo Ominis Gloria_
 
 _This program is free software: you can redistribute it and/or modify_
 _it under the terms of the GNU General Public License as published by_

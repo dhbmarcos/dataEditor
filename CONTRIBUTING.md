@@ -1,4 +1,4 @@
-# Well Come
+# Welcome
 
 Thanks for read this document. If you want participe to develope this project, continue reading.
 I'm hapy for you wish work with me.
@@ -24,4 +24,4 @@ mark done the requeriments are met.
 ## Developing
 
 For developing in this project, you can help user with `questions`, `help wanted`, correcting `bugs` or
-implementing `enhancements`. Please, fork this project when necessary.
+implementing `enhancements`. Please, fork this project. Your contribution will be very welcome.

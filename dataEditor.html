@@ -35,6 +35,7 @@
 		<script>
 			
 			visualConfiguratons = {};
+			paths = [];
 			
 			window.onerror = function (message, url, lineNumber) {
 				alert ('Error message: ' + message + '\nURL: ' + url + '\nLine Number: ' + lineNumber);
@@ -69,8 +70,8 @@
 				text = "<ul class='" + visualConfiguratons.all.unorderedListStyles + "'>";
 
 				for (property in object) {
-					text += "<li id='" + id + "/" + property + "'>" + property + ": <input type='text' value='" +
-						parseElement (object [property], id + "/" + property) + "'></li>\n";
+					text += "<li id='" + id + "/" + property + "'>" + property + ": <input type='text' name='" + id + "/" + property +
+						"' value='" + parseElement (object [property], id + "/" + property) + "'></li>\n";
 				};
 
 				return text + "</ul>\n";
@@ -202,14 +203,30 @@
 					loadData (fileName);
 				};
 			};
+			
+			function inputToPath () {
+				var text = "";
+				
+				var elements = document.forms.data.getElementsByTagName("input");
+				for(var i = 0; i < elements.length; i++)
+				{
+					   path = {};
+					   path.path = elements[i].name;
+					   path.value = elements[i].value;
+					   
+					   paths.push(path);
+				}
+			}
+			
 		</script>
 	</head>
     <body onload="load ()">
     	<header class="w3-container w3-theme">
-			<h1><div id="title"/></h1>
+			<h1><div id="title"/></h1><button class="w3-btn w3-ripple" onclick="inputToPath()">input to path</button>
 		</header>
 		<article class="w3-container"> 
-			<p><div id="data"></p>
+			<form id="data">
+			</form>
 		</article>
 		<footer class="w3-container w3-theme w3-tiny">
 			<h5>dataEditor</h5>

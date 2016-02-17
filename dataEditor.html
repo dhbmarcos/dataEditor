@@ -204,7 +204,7 @@
 				};
 			};
 			
-			function inputToPath () {
+			function input2path () {
 				var text = "";
 				
 				var elements = document.forms.data.getElementsByTagName("input");
@@ -215,14 +215,35 @@
 					   path.value = elements[i].value;
 					   
 					   paths.push(path);
+				};
+			};
+			
+			function path2json () {
+			
+				text = "";
+				
+				var a = [];
+				
+				for (path in paths) {
+					a.push (paths [path].path.split ('/'));
+				};
+				
+				for (i in a) {
+					text += a[i] + "\n";
 				}
-			}
+				
+				alert(text);
+				alert(a);
+				
+			};
 			
 		</script>
 	</head>
     <body onload="load ()">
     	<header class="w3-container w3-theme">
-			<h1><div id="title"/></h1><button class="w3-btn w3-ripple" onclick="inputToPath()">input to path</button>
+			<h1><div id="title"/></h1>
+			<button class="w3-btn w3-ripple" onclick="input2path()">input2path</button>
+			<button class="w3-btn w3-ripple" onclick="path2json()">path2json</button>
 		</header>
 		<article class="w3-container"> 
 			<form id="data">

@@ -69,7 +69,8 @@
 				text = "<ul class='" + visualConfiguratons.all.unorderedListStyles + "'>";
 
 				for (property in object) {
-					text += "<li id='" + id + "/" + property + "'>" + property + ": " + parseElement (object [property], id + "/" + property) + "</li>\n";
+					text += "<li id='" + id + "/" + property + "'>" + property + ": <input type='text' value='" +
+						parseElement (object [property], id + "/" + property) + "'></li>\n";
 				};
 
 				return text + "</ul>\n";
@@ -85,7 +86,7 @@
 					};
 				} else {
 					visualConfiguratons.elements ["/" + id + "/"] = {};
-					return element + " (" + id + ")\n";
+					return element + "\n";
 				};
 			};
 

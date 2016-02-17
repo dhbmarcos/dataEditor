@@ -2,17 +2,9 @@
 {
 	"visualConfiguratons": {
 		"all": {
-			"theme": "blue",
-			"ol2ul": true,
-			"orderedListStyles": "",
-			"unorderedListStyles": "nolistsymbol"
+			"theme": "blue"
 		},
-		"elements": {
-			"input/1/blue": {
-				"class": "w3-card-2",
-				"bold": true
-			}
-		}
+		"elements": {}
 	},
 	"data": [
 		{

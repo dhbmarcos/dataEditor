@@ -204,7 +204,7 @@
 				};
 			};
 			
-			function inputToPath () {
+			function input2path () {
 				var text = "";
 				
 				var elements = document.forms.data.getElementsByTagName("input");
@@ -215,14 +215,54 @@
 					   path.value = elements[i].value;
 					   
 					   paths.push(path);
-				}
-			}
+				};
+			};
+			
+			function path2JSON () {
+			
+				text1 = "";
+				text2 = "";
+				
+				var brackets = 0;
+				var key = 0;
+				
+				
+				
+				var array = [];
+				
+				for (path in paths) {
+					text1 += paths [path].path + " = " + paths [path].value + "<br>\n";
+					array.push (paths [path].path.split ('/'));
+				};
+
+				var json = {};
+				
+					for (path in array) {
+						for (element in array [path]) {
+							if (Number.isInteger (Number (array [path] [element]))) {
+								json [array [path] [element]] = array [path] [element];
+							} else {
+								json [array [path] [element]] = array [path] [element];
+							};
+						};
+					};
+				println (array);
+				println (text1);
+				println (json);
+				
+				println (parseElement (json, "output"));
+				
+			};
+			
+			
 			
 		</script>
 	</head>
     <body onload="load ()">
     	<header class="w3-container w3-theme">
-			<h1><div id="title"/></h1><button class="w3-btn w3-ripple" onclick="inputToPath()">input to path</button>
+			<h1><div id="title"/></h1>
+			<button class="w3-btn w3-ripple" onclick="input2path ()">input2path</button>
+			<button class="w3-btn w3-ripple" onclick="path2JSON ()">path2JSON</button>
 		</header>
 		<article class="w3-container"> 
 			<form id="data">

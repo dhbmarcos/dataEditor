@@ -8,6 +8,8 @@ I'm hapy for you wish work with me.
 You can contribute with this project using, sending feedback or testing of a `product` or `test` release.
 For developing, please feel free for contribute in any release.
 
+Access https://overv.io/workspace/dhbmarcos/shiny-stingray/ for more informations about this project.
+
 ## Sending A Feedback
 
 Submit a feedback through of `issues`. Don't forget to tagging the `issue`. 

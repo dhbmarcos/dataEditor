@@ -36,6 +36,7 @@
 			
 			visualConfiguratons = {};
 			paths = [];
+			indexes = {};
 			
 			window.onerror = function (message, url, lineNumber) {
 				alert ('Error message: ' + message + '\nURL: ' + url + '\nLine Number: ' + lineNumber);
@@ -111,9 +112,13 @@
 						var actual_JSON = JSON.parse (response);
 
 						if (parseVisualConfiguratonsAll (actual_JSON)) { 					
-							//println (parseElement (actual_JSON.data, "input"));
+							println (parseElement (actual_JSON.data, "input"));
+							indexes.input = actual_JSON.data;
+							index (indexes.input, "input");
 						} else {
-							//println (parseElement (actual_JSON, "input"));
+							println (parseElement (actual_JSON, "input"));
+							indexes.input = actual_JSON;
+							index (indexes.input, "input");
 						}
 					
 						parseVisualConfiguratonselements (actual_JSON);
@@ -206,18 +211,6 @@
 			};
 
 
-			input = [
-				{
-					"blue" : "is ok",
-					"red" : "is my fave color"
-				}, {
-					"blue" : "is ok",
-					"red" : "is my fave color"
-				}
-			];
-				
-				
-			
 			function index (element, id) {
 				
 				if (typeof (element) == "object") {
@@ -253,7 +246,7 @@
 			};
 
 			
-			function unindex (element, id) {
+			function inputs2JSON (element, id) {
 				
 				if (typeof (element) == "object") {
 					if (Array.isArray (element)) {
@@ -264,7 +257,7 @@
 								if (! first) {
 									text += ", ";
 								}
-								text += unindex (element [position], id + "/" + position);
+								text += inputs2JSON (element [position], id + "/" + position);
 								first = false;
 							};
 							return text +"]";
@@ -277,7 +270,7 @@
 								if (! first) {
 									text += ", ";
 								}
-								text +=  '"' + property + '": ' + unindex (element [property], id + "/" + property);
+								text +=  '"' + property + '" : ' + inputs2JSON (element [property], id + "/" + property);
 								first = false;
 							};
 							return text + "}";
@@ -288,26 +281,26 @@
 			};
 			
 			
-			passBy = {};
-			function prototype2 () {
-				var newindex = JSON.parse (index (passBy.reference, "XI"))
-				println (unindex (newindex, "XI"));
+			
+			function showJSONOutput (data) {
+				document.write(data);
+				document.close()
+			}
+			
+			function toJSON () {
+				var json = "";
+				indexes.data = JSON.parse (index (indexes.input, "input"));
+				json = inputs2JSON (indexes.data, "input")
+				showJSONOutput (json);
 			};			
 
-			function prototype () {
-				passBy.reference = input;
-				println (index (passBy.reference, "XF"));
-
-				println (parseElement (input, "XI"));
-			};			
 			
 		</script>
 	</head>
     <body onload="load ()">
     	<header class="w3-container w3-card-4 w3-theme">
 			<h1><div id="title"/></h1>
-			<button class="w3-btn w3-ripple" onclick="prototype ()">prototype</button>
-			<button class="w3-btn w3-ripple" onclick="prototype2 ()">prototype2</button>
+			<button class="w3-btn w3-ripple" onclick="toJSON ()">toJSON</button>
 		</header>
 		<article class="w3-container"> 
 			<form id="data">

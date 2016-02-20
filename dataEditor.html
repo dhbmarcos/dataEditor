@@ -70,8 +70,9 @@
 				text = "<ul class='" + visualConfiguratons.all.unorderedListStyles + "'>";
 
 				for (property in object) {
-					text += "<li id='" + id + "/" + property + "'>" + property + ": <input type='text' name='" + id + "/" + property +
-						"' value='" + parseElement (object [property], id + "/" + property) + "'></li>\n";
+					text += "<li id='" + id + "/" + property + "'>" + property + ": <input type='text' id='" + id + "/" + property +
+						"/value' value='" + parseElement (object [property], id + "/" + property) + "'>" +
+						"(" + id + "/" + property + "/value)</li>\n";
 				};
 
 				return text + "</ul>\n";
@@ -110,11 +111,11 @@
 						var actual_JSON = JSON.parse (response);
 
 						if (parseVisualConfiguratonsAll (actual_JSON)) { 					
-							println (parseElement (actual_JSON.data, "input"));
+							//println (parseElement (actual_JSON.data, "input"));
 						} else {
-							println (parseElement (actual_JSON, "input"));
+							//println (parseElement (actual_JSON, "input"));
 						}
-						
+					
 						parseVisualConfiguratonselements (actual_JSON);
 					}
 				);
@@ -203,78 +204,122 @@
 					loadData (fileName);
 				};
 			};
-			
-			function input2path () {
-				var text = "";
-				
-				var elements = document.forms.data.getElementsByTagName("input");
-				for(var i = 0; i < elements.length; i++)
-				{
-					   path = {};
-					   path.path = elements[i].name;
-					   path.value = elements[i].value;
-					   
-					   paths.push(path);
-				};
-			};
-			
-			function path2JSON () {
-			
-				text1 = "";
-				text2 = "";
-				
-				var brackets = 0;
-				var key = 0;
-				
-				
-				
-				var array = [];
-				
-				for (path in paths) {
-					text1 += paths [path].path + " = " + paths [path].value + "<br>\n";
-					array.push (paths [path].path.split ('/'));
-				};
 
-				var json = {};
+
+			input = [
+				{
+					"blue" : "is ok",
+					"red" : "is my fave color"
+				}, {
+					"blue" : "is ok",
+					"red" : "is my fave color"
+				}
+			];
 				
-					for (path in array) {
-						for (element in array [path]) {
-							if (Number.isInteger (Number (array [path] [element]))) {
-								json [array [path] [element]] = array [path] [element];
-							} else {
-								json [array [path] [element]] = array [path] [element];
+				
+			
+			function index (element, id) {
+				
+				if (typeof (element) == "object") {
+					if (Array.isArray (element)) {
+						{
+							text = "[";
+							first = true;
+							for (position in element) {
+								if (! first) {
+									text += ", ";
+								}
+								text += index (element [position], id + "/" + position);
+								first = false;
 							};
-						};
-					};
-				println (array);
-				println (text1);
-				println (json);
+							return text +"]";
+						}
+
+					} else {
+							text = "{";
+							first = true;
+							for (property in element) {
+								if (! first) {
+									text += ", ";
+								}
+								text +=  '"' + property + '": ' + index (element [property], id + "/" + property + "/value");
+								first = false;
+							};
+							return text + "}";
+						}
+				} else {
+					return '"' + id + '"';
+				};
+			};
+
+			
+			function unindex (element, id) {
 				
-				println (parseElement (json, "output"));
-				
+				if (typeof (element) == "object") {
+					if (Array.isArray (element)) {
+						{
+							text = "[";
+							first = true;
+							for (position in element) {
+								if (! first) {
+									text += ", ";
+								}
+								text += unindex (element [position], id + "/" + position);
+								first = false;
+							};
+							return text +"]";
+						}
+
+					} else {
+							text = "{";
+							first = true;
+							for (property in element) {
+								if (! first) {
+									text += ", ";
+								}
+								text +=  '"' + property + '": ' + unindex (element [property], id + "/" + property);
+								first = false;
+							};
+							return text + "}";
+						}
+				} else {
+					return '"' + document.getElementById(element).value + '"';
+				};
 			};
 			
 			
+			passBy = {};
+			function prototype2 () {
+				var newindex = JSON.parse (index (passBy.reference, "XI"))
+				println (unindex (newindex, "XI"));
+			};			
+
+			function prototype () {
+				passBy.reference = input;
+				println (index (passBy.reference, "XF"));
+
+				println (parseElement (input, "XI"));
+			};			
 			
 		</script>
 	</head>
     <body onload="load ()">
-    	<header class="w3-container w3-theme">
+    	<header class="w3-container w3-card-4 w3-theme">
 			<h1><div id="title"/></h1>
-			<button class="w3-btn w3-ripple" onclick="input2path ()">input2path</button>
-			<button class="w3-btn w3-ripple" onclick="path2JSON ()">path2JSON</button>
+			<button class="w3-btn w3-ripple" onclick="prototype ()">prototype</button>
+			<button class="w3-btn w3-ripple" onclick="prototype2 ()">prototype2</button>
 		</header>
 		<article class="w3-container"> 
 			<form id="data">
 			</form>
 		</article>
-		<footer class="w3-container w3-theme w3-tiny">
+		<!-- footer class="w3-container w3-card-4 w3-theme w3-tiny">
 			<h5>dataEditor</h5>
 			<p><i>dataEditor  Copyright (C) 2016  D. H. B. Marcos</br>
 			   This program comes with ABSOLUTELY NO WARRANTY;
 			   This is free software, and you are welcome to
 			   redistribute it under certain conditions;
     		   See <a href="https://raw.githubusercontent.com/dhbmarcos/dataEditor/master/LICENSE">here</a> for details.</i></p>
-		</footer> 
+		</footer--> 
     </body>
 <html>
